@@ -1,5 +1,8 @@
 -- Load some default values for our rectangle.
 function love.load()
+    love.window.setMode(320, 480, { resizable = false })
+    love.window.setTitle("14bis vs Meteoros")
+
     x, y, w, h = 20, 20, 60, 20
 end
 
