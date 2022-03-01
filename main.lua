@@ -5,8 +5,18 @@ end
 
 -- Increase the size of the rectangle every frame.
 function love.update(dt)
-    w = w + 1
-    h = h + 1
+    if love.keyboard.isDown("w") then
+        y = y - 1
+    end
+    if love.keyboard.isDown("s") then
+        y = y + 1
+    end
+    if love.keyboard.isDown("a") then
+        x = x - 1
+    end
+    if love.keyboard.isDown("d") then
+        x = x + 1
+    end
 end
 
 -- Draw a coloured rectangle.
