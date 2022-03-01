@@ -24,7 +24,6 @@ function movePlayer()
     end
 end
 
--- Load some default values for our rectangle.
 function love.load()
     love.window.setMode(320, 480, { resizable = false })
     love.window.setTitle("14bis vs Meteoros")
@@ -33,14 +32,12 @@ function love.load()
     player.avatar = love.graphics.newImage(player.avatar_path)
 end
 
--- Increase the size of the rectangle every frame.
 function love.update(dt)
     if love.keyboard.isDown("a", "w", "s", "d") then
         movePlayer()
     end
 end
 
--- Draw a coloured rectangle.
 function love.draw()
     love.graphics.draw(background, 0, 0)
     love.graphics.draw(player.avatar, player.position.x, player.position.y)
