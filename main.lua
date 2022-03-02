@@ -1,6 +1,7 @@
 
 WIDTH_SCREEN = 320
 HEIGHT_SCREEN = 480
+MAX_METEORS = 12
 
 player = {
     avatar_path = "images/14bis.png",
@@ -12,12 +13,17 @@ player = {
     }
 }
 
-x = 0
-y = 0
-
 meteors = {}
 
-function createMeteor() 
+function removeMeteors()
+    for i = #meteors, 1, -1 do
+        if meteors[i].y > HEIGHT_SCREEN then
+            table.remove(meteors, i)
+        end
+    end
+end
+
+function createMeteors() 
     meteor = {
         x = math.random(WIDTH_SCREEN),
         y = 0
@@ -60,7 +66,10 @@ function love.update(dt)
         movePlayer()
     end
 
-    createMeteor()
+    removeMeteors()
+    if #meteors < MAX_METEORS then
+        createMeteors()
+    end
     moveMeteors()
 end
 
@@ -71,5 +80,4 @@ function love.draw()
     for key, meteor in pairs(meteors) do
         love.graphics.draw(meteors_image, meteor.x, meteor.y)
     end
-
 end
