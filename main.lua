@@ -26,14 +26,17 @@ end
 function createMeteors() 
     meteor = {
         x = math.random(WIDTH_SCREEN),
-        y = 0
+        y = -70,
+        weight = math.random(3),
+        horizontal_shift = math.random(-1, 1)
     }
     table.insert(meteors, meteor)
 end
 
 function moveMeteors()
     for k, meteor in pairs(meteors) do
-        meteor.y = meteor.y + 1
+        meteor.y = meteor.y + meteor.weight
+        meteor.x = meteor.x + meteor.horizontal_shift
     end
 end
 
@@ -55,6 +58,8 @@ end
 function love.load()
     love.window.setMode(WIDTH_SCREEN, HEIGHT_SCREEN, { resizable = false })
     love.window.setTitle("14bis vs Meteoros")
+
+    math.randomseed(os.time())
 
     background = love.graphics.newImage("images/background.png")
     player.avatar = love.graphics.newImage(player.avatar_path)
