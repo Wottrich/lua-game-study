@@ -12,6 +12,9 @@ player = {
     }
 }
 
+x = 0
+y = 0
+
 function movePlayer() 
     if love.keyboard.isDown("w") then
         player.position.y = player.position.y - 1
@@ -33,6 +36,7 @@ function love.load()
 
     background = love.graphics.newImage("images/background.png")
     player.avatar = love.graphics.newImage(player.avatar_path)
+    meteors_image = love.graphics.newImage("images/meteoro.png")
 end
 
 function love.update(dt)
@@ -44,4 +48,5 @@ end
 function love.draw()
     love.graphics.draw(background, 0, 0)
     love.graphics.draw(player.avatar, player.position.x, player.position.y)
+    love.graphics.draw(meteors_image, x, y)
 end
