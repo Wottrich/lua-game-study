@@ -15,6 +15,22 @@ player = {
 x = 0
 y = 0
 
+meteors = {}
+
+function createMeteor() 
+    meteor = {
+        x = math.random(WIDTH_SCREEN),
+        y = 0
+    }
+    table.insert(meteors, meteor)
+end
+
+function moveMeteors()
+    for k, meteor in pairs(meteors) do
+        meteor.y = meteor.y + 1
+    end
+end
+
 function movePlayer() 
     if love.keyboard.isDown("w") then
         player.position.y = player.position.y - 1
@@ -43,10 +59,17 @@ function love.update(dt)
     if love.keyboard.isDown("a", "w", "s", "d") then
         movePlayer()
     end
+
+    createMeteor()
+    moveMeteors()
 end
 
 function love.draw()
     love.graphics.draw(background, 0, 0)
     love.graphics.draw(player.avatar, player.position.x, player.position.y)
-    love.graphics.draw(meteors_image, x, y)
+    
+    for key, meteor in pairs(meteors) do
+        love.graphics.draw(meteors_image, meteor.x, meteor.y)
+    end
+
 end
