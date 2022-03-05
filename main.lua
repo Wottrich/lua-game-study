@@ -14,7 +14,7 @@ player = {
 
 meteors = {}
 
-function gameOver()
+function changePlayerImageToCollision()
     player.avatar_path = "images/explosao_nave.png"
     player.avatar = love.graphics.newImage(player.avatar_path)
     player.width = 67
@@ -29,9 +29,14 @@ function checkCollisons()
     for key, meteor in pairs(meteors) do
         if (hasCollision(meteor.x, meteor.y, meteor.width, meteor.height, player.position.x, player.position.y,
             player.width, player.height)) then
-            gameOver()
+            handleCollision()
         end
     end
+end
+
+function handleCollision()
+    changePlayerImageToCollision()
+    GAME_OVER = true
 end
 
 function removeMeteors()
@@ -90,16 +95,18 @@ function love.load()
 end
 
 function love.update(dt)
-    if love.keyboard.isDown("a", "w", "s", "d") then
-        movePlayer()
+    if not GAME_OVER then
+        if love.keyboard.isDown("a", "w", "s", "d") then
+            movePlayer()
+        end
+    
+        removeMeteors()
+        if #meteors < MAX_METEORS then
+            createMeteors()
+        end
+        moveMeteors()
+        checkCollisons()
     end
-
-    removeMeteors()
-    if #meteors < MAX_METEORS then
-        createMeteors()
-    end
-    moveMeteors()
-    checkCollisons()
 end
 
 function love.draw()
