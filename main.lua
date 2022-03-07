@@ -92,6 +92,10 @@ function love.load()
     background = love.graphics.newImage("images/background.png")
     player.avatar = love.graphics.newImage(player.avatar_path)
     meteors_image = love.graphics.newImage("images/meteoro.png")
+
+    background_music = love.audio.newSource("audios/ambiente.wav", "static")
+    background_music:setLooping(true)
+    background_music:play()
 end
 
 function love.update(dt)
